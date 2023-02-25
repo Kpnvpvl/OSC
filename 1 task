@@ -3,3 +3,4 @@ useradd -m -s /bin/bash student
 passwd student
 login
 whoami
+logout
