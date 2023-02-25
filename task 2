@@ -1,10 +1,13 @@
 #NAT
+iface enpos3 inet dhcp
 sudo iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
 sodu iptables -t nat -L -n -v
 
 #direct
 ifconfig -a
 sudo ifconfig enp0s3 213.232.244.24 netmask 255.255.255.0 up
+sudo ifup /etc/hetplan/*.yanl
+
 
 #proxy command
 sudo apt-get update
@@ -12,14 +15,3 @@ sudo apt-get install nginx
 #proxy configuration in the file
 sudo service nginx restart
 
-#proxy settings
-server {
-    listen 80;
-    server_name example.com;
-
-    location / {
-        proxy_pass http://localhost:8080;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-    }
-}
