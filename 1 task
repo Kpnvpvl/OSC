@@ -1,0 +1,3 @@
+sudo su
+useradd -m -s /bin/bash student
+passwd student
