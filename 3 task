@@ -1,0 +1,33 @@
+obj-m += hello_module.o
+
+all:
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+
+clean:
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+
+
+
+
+#include <linux/init.h>
+#include <linux/module.h>
+#include <linux/kernel.h>
+
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR(Aldiyar,Madiyar, Dias, Batyrhan");
+MODULE_DESCRIPTION("3 task.");
+MODULE_VERSION("0.01");
+
+static int __init hello_init(void) {
+    printk(KERN_INFO "Hello WORLD!\n");
+    return 0;
+}
+
+static void __exit hello_exit(void) {
+    printk(KERN_INFO "Goodbye ! Have fun.\n");
+}
+
+module_init(hello_init);
+module_exit(hello_exit);
+
+
